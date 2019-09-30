@@ -2,12 +2,52 @@
 //var token = sessionStorage.token;
 
 
+// let userID = parseInt(localStorage.getItem('accout_id'))
+// let token = localStorage.getItem('usertoken')
+// if(token !== null && userID > 0){
+//     if(to.path === '/' || to.path === '/'){
+//         next({path: '/templates'})
+//     }else if(to.meta.tokenRequired === true){
+//         next({path: '/'})
+//     }else{
+//         next()
+//     }
+// }
+// next()
+
+let token = sessionStorage.getItem('token')
+
 let beforeEnter = (to, from, next) =>{
-    // if(to.meta.token){
-    //     next('/dashboard')
+    // if(to.fullpath === '/dashboard'){
+    //     if(token === false){
+    //         next()
+    //     }
     // }
-    next() 
+    // if(to.fullpath === '/'){
+    //     if(token === true){
+    //         next('/dashboard')
+    //     }
+    // }
+    if(token != ''){
+        //alert(token)
+        next()
+        if(to.path === '/'){
+            if(token == true){
+                next({path: '/dashboard'}) 
+               
+            }
+        }
+        else if(to.meta.token === true){
+            next({path: '/'}) 
+        }
+        else{
+            next()
+        }
+    
+    }
+    
 }
+
 
 
 let devRoutes = []

@@ -28,6 +28,7 @@
 <script>
     import Header from 'components/frame/Header.vue'
     import AUTH from 'services/auth' 
+    import router from 'router'
     export default {
         name:'register',
         auth: AUTH,
@@ -49,7 +50,7 @@
             register() {
                 if(this.input.password == this.input.cfmpassword) {
                     AUTH.StoreData(this.input.fname, this.input.lname, this.input.email, this.input.password)
-                    this.$router.replace({ name: "login" });
+                    router.push({path: '/login'})
                 }
                 else{
                     alert('your password does not match')

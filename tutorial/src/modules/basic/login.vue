@@ -24,7 +24,7 @@
 <script>
     import Header from 'components/frame/Header.vue'
     import AUTH from 'services/auth' 
-     
+    sessionStorage.setItem("token", false);
     export default {
         name:'login',
         auth: AUTH,
@@ -43,6 +43,7 @@
             login() {
                 if(this.input.email != "" && this.input.password != "") {  
                     AUTH.loginValidate(this.input.email, this.input.password)
+                    //sessionStorage.token = true;
                 }
                 else{
                     alert('Email and password must be present!')

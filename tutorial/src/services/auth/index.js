@@ -16,12 +16,13 @@ import router from "../../router";
                         this.currentUser.email = this.Users[i].email
                         this.currentUser.pass = this.Users[i].pass
                         sessionStorage.token = true;
+                        //sessionStorage.claire ="else"
                         router.push({path: '/dashboard'})
-
-                        //alert(JSON.stringify(this.currentUser))
                     }
                     else{
                         alert("MyFirstApp doesn't reconized your account")
+                        sessionStorage.token = false;
+                        //sessionStorage.claire = "klara"
                     }
                 }
 

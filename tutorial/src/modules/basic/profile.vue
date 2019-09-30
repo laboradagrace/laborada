@@ -10,7 +10,7 @@
     <div  class="container bootstrap snippets">
 
     <div class="card">
-    <img src="https://i.pinimg.com/736x/e1/98/44/e19844439b3ed3fa3f9576bd0cf07c6d.jpg" alt="John" style="width:100%">
+    <img src="https://i.pinimg.com/originals/9f/fd/8a/9ffd8afe7eafe769f1247f30ffdd6494.jpg" alt="me" style="width:100%">
     
     <h1 id= "fullname" v-html="fn"> </h1>
     
@@ -34,7 +34,7 @@
             <br>
             <div class="panel panel-default">
             <div class="panel-body text-center">
-            <img src="https://i.pinimg.com/736x/e1/98/44/e19844439b3ed3fa3f9576bd0cf07c6d.jpg" class="img-circle profile-avatar" alt="User avatar">
+            <img src="https://i.pinimg.com/originals/9f/fd/8a/9ffd8afe7eafe769f1247f30ffdd6494.jpg" class="img-circle profile-avatar" alt="User avatar">
             </div>
             </div>
         <div class="panel panel-default">
@@ -108,7 +108,7 @@
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-2">
                 <button type="submit" class="btn btn-primary" @click = "editSubmit()">Submit</button>
-                
+                <br><br>
                 <button type="reset" class="btn btn-default" @click = "cancel()">Cancel</button>
                 </div>
             </div>

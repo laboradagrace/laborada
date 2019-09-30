@@ -18,7 +18,6 @@
     </ul>
     </div>
     <!-- Content -->
-    
     </div>
 </template>
 <script>
@@ -29,7 +28,7 @@ import Router from 'router'
                 Router.push(route)
             },
             logout(){
-              sessionStorage.token = false;
+              sessionStorage.setItem("token", false);
               this.$router.replace({ name: "login" });
             }
         }
