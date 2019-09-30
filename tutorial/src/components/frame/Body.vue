@@ -5,12 +5,7 @@
         </transition>
     </div>
 </template>
-<style scoped>
-body{
-    background-color: black;
-}
 
-</style>
 <script>
     export default{
         data(){

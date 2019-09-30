@@ -1,4 +1,6 @@
 <template>
+<div>
+    <Header></Header>
     <form  method="post" onsubmit="return false" id="login-form" >
     <h1>Register</h1>
     <div class="input-box">
@@ -21,10 +23,17 @@
     <p>Already have an account? <a href="modules/login.vue">Log in</a></p>
     </div>
     </form>
+</div>
 </template>
 <script>
+    import Header from 'components/frame/Header.vue'
+    import AUTH from 'services/auth' 
     export default {
         name:'register',
+        auth: AUTH,
+        components:{
+            Header
+        },
         data() {
             return {
                 input: {
@@ -39,21 +48,16 @@
         methods: {
             register() {
                 if(this.input.password == this.input.cfmpassword) {
-                   //console.log("Successful registration");
+                    AUTH.StoreData(this.input.fname, this.input.lname, this.input.email, this.input.password)
+                    this.$router.replace({ name: "login" });
+                }
+                else{
+                    alert('your password does not match')
                 }
             }
         }
     }
 </script>
-<!--<script>
-export default {
-  name: 'register',
-  props: {
-    msg: String
-  }
-}
-</script>-->
-
 <style scoped> 
 *{
     margin: 0;

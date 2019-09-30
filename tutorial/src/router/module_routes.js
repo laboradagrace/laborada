@@ -1,9 +1,14 @@
-// import AUTH from '../services/auth'
+//import AUTH from 'services/auth'
+//var token = sessionStorage.token;
+
 
 let beforeEnter = (to, from, next) =>{
-    //redirect if no token
-    next()
+    // if(to.meta.token){
+    //     next('/dashboard')
+    // }
+    next() 
 }
+
 
 let devRoutes = []
 let app = require('router/app.js')

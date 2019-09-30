@@ -1,8 +1,10 @@
 <template>
+<div>
+    <Header></Header>
     <form  id="login-form">
 	<h1>Welcome!</h1>
 	<div class="input-box">
-	<input type="text" v-model="input.username" placeholder="Username" required="required">
+	<input type="email" v-model="input.email" placeholder="Email" required="required">
 	</div>
 	<div class="input-box">
 	<input type="password" v-model="input.password" placeholder="Password" required="required">
@@ -10,30 +12,42 @@
 	<label>
 	<input type="checkbox" name="remember"> Remember me
 	</label>
-    <button type="submit" class="login-btn" v-on:click="login()" >Login</button>
+    <button type="submit" class="login-btn"  v-on:click="login()" >Login</button>
 	<div class="bottom-links">
 	<p>Don’t have account? <a href= "modules/register.vue">Sign up</a></p>
 	</div>
 	</form>
+</div>
 
    
 </template>
 <script>
+    import Header from 'components/frame/Header.vue'
+    import AUTH from 'services/auth' 
+     
     export default {
         name:'login',
+        auth: AUTH,
+        components:{
+            Header
+        },
         data() {
             return {
                 input: {
-                    username: "",
+                    email: "",
                     password: ""
                 }
             }
         },
         methods: {
             login() {
-                if(this.input.username != "" && this.input.password != "") {
-                   //console.log("Username : " + this.input.username +"\nPassword : " + this.input.password);
+                if(this.input.email != "" && this.input.password != "") {  
+                    AUTH.loginValidate(this.input.email, this.input.password)
                 }
+                else{
+                    alert('Email and password must be present!')
+                }
+                
             }
         }
     }

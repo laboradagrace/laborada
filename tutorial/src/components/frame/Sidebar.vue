@@ -1,113 +1,48 @@
 <template>
     <div id="viewport">
     <div id="sidebar">
-    <header>
-    <a href="#">My App</a>
-    </header>
+    
     <ul class="nav">
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-link"></i> Shortcuts
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-widgets"></i> Overview
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-calendar"></i> Events
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-info-outline"></i> About
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-settings"></i> Services
-    </a>
-    </li>
-    <li>
-    <a href="#">
-    <i class="zmdi zmdi-comment-more"></i> Contact
-    </a>
-    </li>
+      <div id="div1">
+        <a href="#" v-on:click = "redirect('/dashboard')"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
+      </div>
+      <div id="div1">
+        <a href="#" v-on:click = "redirect('/profile')"><i class="fa fa-fw fa-home"></i>Edit Profile</a>
+      </div>
+      <div id="div1">
+        <a href="#" v-on:click = "redirect('/addCourse')"><i class="zmdi zmdi-widgets"></i>Add Course and Subjects</a>
+      </div>
+      <div id="div1" >
+        <a href="#" v-on:click ="logout()"><i class="zmdi zmdi-calendar"></i>Log out</a>
+      </div>
     </ul>
     </div>
     <!-- Content -->
-    <div id="content">
-    <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-    <li>
-    <a href="#"><i class="zmdi zmdi-notifications text-danger"></i>
-    </a>
-    </li>
-    <li><a href="#">Test User</a></li>
-    </ul>
-    </div>
-    </nav>
-    <div class="container-fluid">
-    <h1>Simple Sidebar</h1>
-    <p>Make sure to keep all page content within the<code>#content</code>.</p>
-    </div>
-    </div>
+    
     </div>
 </template>
 <script>
-    // import Router from 'router'
-    // export default{
-    //     methods: {
-    //         redirect(route){
-    //             Router.push(route)
-    //         }
-    //     }
-    // }
+import Router from 'router'
+    export default{
+        methods: {
+            redirect(route){
+                Router.push(route)
+            },
+            logout(){
+              sessionStorage.token = false;
+              this.$router.replace({ name: "login" });
+            }
+        }
+    }
+  
 </script>
 <style scoped>
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+#sidebar{
+  position: fixed;
+  
+}    
 
 /* Toggle Styles */
-
-#viewport {
-  padding-left: 250px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-#content {
-  width: 100%;
-  position: relative;
-  margin-right: 0;
-}
-
-/* Sidebar Styles */
-
-#sidebar {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 250px;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #37474F;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
 #sidebar header {
   background-color: #263238;
   font-size: 20px;
@@ -125,24 +60,54 @@
   color: #fff;
 }
 
-#sidebar .nav{
+#viewport {
+  padding-left: 250px;
   
 }
 
-#sidebar .nav a{
-  background: none;
-  border-bottom: 1px solid #455A64;
-  color: #CFD8DC;
-  font-size: 14px;
-  padding: 16px 24px;
+#content {
+  
+  width: 100%;
+  position: relative;
+  margin-right: 0;
 }
+
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #37474F;
+}
+#div1{
+  width: 250px;
+  font-size: 20px;
+  text-adivgn: center;
+  background: none;
+  color: #CFD8DC;
+  padding: 16px 24px;
+  border-bottom: 5px solid #455A64;
+  
+}
+
+
+ #div1 :hover {
+  color: #fff;
+}
+
+
 
 #sidebar .nav a:hover{
   background: none;
   color: #ECEFF1;
 }
 
-#sidebar .nav a i{
+#sidebar .nav  i{
   margin-right: 16px;
 }
 </style>
