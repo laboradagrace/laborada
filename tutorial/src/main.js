@@ -4,11 +4,10 @@ import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from 'router';
-//import hello from './components/HelloWorld.vue';
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
-//Vue.use(router);
+
 
 new Vue({
   render: h => h(App),
@@ -17,13 +16,3 @@ new Vue({
 }).$mount('#app')
 
 
-
-// export default new Router({
-//   routes: [
-//     {
-//       path : "/HelloWorld",
-//       name : "HelloWorld",
-//       component : hello
-//     }
-//   ]
-// })

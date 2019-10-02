@@ -15,14 +15,12 @@ import router from "../../router";
                         this.currentUser.lname = this.Users[i].lname
                         this.currentUser.email = this.Users[i].email
                         this.currentUser.pass = this.Users[i].pass
-                        sessionStorage.token = true;
-                        //sessionStorage.claire ="else"
+                        sessionStorage.setItem("token", true);
                         router.push({path: '/dashboard'})
                     }
                     else{
                         alert("MyFirstApp doesn't reconized your account")
-                        sessionStorage.token = false;
-                        //sessionStorage.claire = "klara"
+                        sessionStorage.setItem("token", false);
                     }
                 }
 
@@ -36,8 +34,6 @@ import router from "../../router";
                     pass: pass
                 }
                 this.Users.push(regAccount);
-                
-                //sessionStorage.accountdetails = ;
             }
     }
     

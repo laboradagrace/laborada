@@ -10,7 +10,7 @@
     <div  class="container bootstrap snippets">
 
     <div class="card">
-    <img src="https://i.pinimg.com/originals/9f/fd/8a/9ffd8afe7eafe769f1247f30ffdd6494.jpg" alt="me" style="width:100%">
+    <img id="pic" src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" alt="me" style="width:100%">
     
     <h1 id= "fullname" v-html="fn"> </h1>
     
@@ -34,7 +34,13 @@
             <br>
             <div class="panel panel-default">
             <div class="panel-body text-center">
-            <img src="https://i.pinimg.com/originals/9f/fd/8a/9ffd8afe7eafe769f1247f30ffdd6494.jpg" class="img-circle profile-avatar" alt="User avatar">
+            <img id="pic1" src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" class="img-circle profile-avatar" alt="User avatar">
+            <div class="form-group">
+                <label class= "col-sm-5 control-label">Change Picture</label>
+                <div class="col-sm-10">
+                <input type="text" placeholder="Enter image address" class="form-control" v-model="input.picAddress">
+            </div>
+            </div>
             </div>
             </div>
         <div class="panel panel-default">
@@ -78,7 +84,7 @@
             <div class="panel-body">
          
             <div class="form-group">
-                <label class="col-sm-2 control-label"> E-mail address</label>
+                <label class="col-sm-5 control-label"> E-mail address</label>
                 <div class="col-sm-10">
                 <input type="email" class="form-control" v-model="input.email">
                 </div>
@@ -87,24 +93,8 @@
             </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-            <h4 class="panel-title">Security</h4>
-            </div>
+        <div class="panel panel-default">    
             <div class="panel-body">
-            <div class="form-group">
-                <label class="col-sm-2 control-label"> CurrentPassword</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" v-model="input.CurrentP">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label"> NewPassword</label>
-                <div class="col-sm-10">
-                <input type="password" class="form-control" v-model="input.NewP">
-                </div>
-            </div>
-            
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-2">
                 <button type="submit" class="btn btn-primary" @click = "editSubmit()">Submit</button>
@@ -126,8 +116,7 @@
 <script>   
     import Sidebar from 'components/frame/Sidebar.vue'
     import AUTH from 'services/auth'
-    
-    //window.onload = function(){
+
         var fn = JSON.stringify(AUTH.currentUser.fname)
         var ln = JSON.stringify(AUTH.currentUser.lname) 
         var email = JSON.stringify(AUTH.currentUser.email)
@@ -135,9 +124,7 @@
         email = email.replace(/['"]+/g, '')
         fullname = fullname.replace(/['"]+/g, '')
         
-        
-        
-        
+
         export default {
         name: 'profile',
         data() {
@@ -147,12 +134,11 @@
                 email: email,
                 location: '',
                 input:{
-                    location: '',
-                    fname: '',
-                    lname: '',
-                    email: '',
-                    CurrentP: '',
-                    NewP:''
+                    location: 'Default',
+                    fname: fn,
+                    lname: ln,
+                    email: email,
+                    picAddress: ''
                 }
             }
         },
@@ -173,11 +159,15 @@
 
             },
             editSubmit(){
-                //alert("clicked")
                 this.fn = this.input.fname +' '+ this.input.lname
                 this.email = this.input.email
                 this.location = this.input.location
-
+                var EditForm = document.getElementById("pro")
+                EditForm.style.display = "none"
+                var pic= document.getElementById("pic")
+                var pic1= document.getElementById("pic1")
+                pic.src = this.input.picAddress
+                pic1.src = this.input.picAddress
             },
             cancel(){
                 var EditForm = document.getElementById("pro");  
@@ -188,7 +178,6 @@
     
 </script>
 <style scoped>
-
 
 header{
     position:sticky;
@@ -315,3 +304,9 @@ button:hover, a:hover {
 }
       
 </style>
+
+
+       
+
+
+
