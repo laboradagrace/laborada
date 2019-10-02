@@ -32,7 +32,7 @@
                 <td>Default</td>
                 <td>1</td>
                 <td class = "col-sm-10">
-                <button class= "btn btn-success">Add Subjects</button>
+                <button class= "btn btn-success" @click = "addsub()">Add Subjects</button>
 				<button class= "btn btn-info"  @click= "editModal()">Edit</button>
 				<button id="del" @click= "del()" class= "btn btn-danger">Delete</button>
                 </td>
@@ -41,6 +41,68 @@
             </table>    
         </div>
     </div>
+    <!--Add SubjectsModal-->
+    <div id="subjectModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="container">
+                <div class="modal-header">                      
+                        <h4 class="modal-title">Add Subjects</h4>
+                        <button type="button" class="close" v-on:click ="close3()">&times;</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Manage <b>Subjects</b></h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-success" v-on:click = "addsubject()"> <span>Add New Subject</span></a>                 
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                            <th>Name</th>
+                            <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id ="subtable">
+                            <tr id="subrow">
+                            <td>Default</td>
+                            <td class = "col-sm-10">
+                            <button class= "btn btn-info">Edit</button>
+                            <button  class= "btn btn-danger">Delete</button>
+                            </td>
+                            </tr>
+                            </tbody>
+                        </table>    
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <!--addS subject modal form-->
+    <form id= "SubAdd">
+        <div class="modal-header">                      
+            <h4 class="modal-title">Add Sub</h4>
+            <button type="button" class="close" v-on:click ="close4()">&times;</button>
+        </div>
+        <div class="modal-body">                    
+                <div class="form-group">
+                <label>Course</label>
+                <input type="text" class="form-control" v-model="input.courseName">
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" v-on:click ="close4()" value="Cancel">
+                    <input class="btn btn-success" value="Add" v-on:click = "submitAdd()">
+                </div>
+        </div>
+    </form>
+ 
+
     <!-- Add Modal HTML -->
     <div id="addModal">
         <div class="modal-dialog">
@@ -79,11 +141,15 @@
                     </div>
                     <div class="modal-body">                    
                         <div class="form-group">
-                            <label>Course Name</label>
+                            <label>Old Course Name</label>
                             <input type="text" class="form-control" v-model="input.courseName">
                         </div>
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>New Course Name</label>
+                            <input type="text" class="form-control" v-model="input.newcourseName">
+                        </div>
+                        <div class="form-group">
+                            <label>Year</label>
                             <input type="email" class="form-control" v-model="input.year">
                         </div>                  
                     </div>
@@ -108,12 +174,12 @@
             return {
                 Courses: [{
 					courseName: "Default",
-					year: "1",
-					index: 0
+					year: "1"
 				}],
                 isHidden: false,
                 input: {
                     courseName: "", 
+                    newcourseName: "",
                     year:""                  
                 }
             }
@@ -135,6 +201,14 @@
 				editM.style.display = "none";
 				this.count--
 			},
+            close3(){
+                var subM = document.getElementById('subjectModal')
+                subM.style.display = "none";
+            },
+            close4(){
+                var subM = document.getElementById('SubAdd')
+                subM.style.display = "none";
+            },
             submitAdd(){
                 var td = document.createElement('td')
                 var button1 = document.createElement("button")
@@ -172,9 +246,7 @@
 					year: this.year,
 					index: this.count
 				}
-
 				this.Courses.push(cd)
-
 				var addM = document.getElementById('addModal')
                 addM.style.display = "none";
             },
@@ -189,18 +261,45 @@
 			},
             submitEdit() {
 				for(var i = 0; i< this.Courses.length; i++){
-					if(this.Courses[i].index == this.count){
+					if(this.Courses[i].courseName == this.newcourseName){
 						this.Courses[i].courseName = this.input.courseName
 						this.Courses[i].year = this.input.year
 						var row = document.getElementById('row');
-						row.cells[0].innerHTML = this.Courses[i].courseName
+						row.cells[0].innerHTML = this.input.newcourseName
 						row.cells[1].innerHTML = this.Courses[i].year
 					}
 				}
 				var editM = document.getElementById('editModal')
 				editM.style.display = "none";
-
 				
+            },
+            addsub(){
+                var subM = document.getElementById('subjectModal')
+                subM.style.display = "block"
+            },
+            addsubject(){
+                var subM = document.getElementById('SubAdd')
+                subM.style.display = "block"
+            },
+            addSubsubmit(){
+                var td = document.createElement('td')
+               
+                var button3 = document.createElement("button")
+                //button3.addEventListener("click", del);
+				button3.setAttribute('class', 'btn btn-danger')
+                var delete1 = document.createTextNode('Delete')
+				
+                button3.appendChild(delete1)
+                td.appendChild(button3)
+
+                var table = document.getElementById("subtable");
+                var row = table.insertRow(0);
+                row.setAttribute('id', 'row')
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = this.input.courseName;
+                cell2.appendChild(td)
+
             }
         }
     }
@@ -217,6 +316,12 @@
 
 </script>
 <style>
+#SubAdd{
+    display : none;
+}
+#subjectModal{
+    display : none;
+}
 #addModal{
     display: none;
 }

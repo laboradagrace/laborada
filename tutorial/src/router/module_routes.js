@@ -7,9 +7,6 @@ let beforeEnter = (to, from, next) =>{
         if(token === true){
             next({path: '/'}) 
         }
-        else if(token === null || token === false){
-            next()
-        }
         else{
             next()
         }
