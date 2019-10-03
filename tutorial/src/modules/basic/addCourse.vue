@@ -72,8 +72,7 @@
                             <tr id="subrow">
                             <td>Default</td>
                             <td class = "col-sm-10">
-                            <button class= "btn btn-info">Edit</button>
-                            <button  class= "btn btn-danger">Delete</button>
+                            <button  class= "btn btn-danger" @click = "delsub()">Delete</button>
                             </td>
                             </tr>
                             </tbody>
@@ -93,11 +92,11 @@
         <div class="modal-body">                    
                 <div class="form-group">
                 <label>Course</label>
-                <input type="text" class="form-control" v-model="input.courseName">
+                <input type="text" class="form-control" v-model="input.subname">
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" v-on:click ="close4()" value="Cancel">
-                    <input class="btn btn-success" value="Add" v-on:click = "submitAdd()">
+                    <input class="btn btn-success" value="Add" v-on:click = "addSubsubmit()">
                 </div>
         </div>
     </form>
@@ -180,7 +179,8 @@
                 input: {
                     courseName: "", 
                     newcourseName: "",
-                    year:""                  
+                    year:"" ,
+                    subname:"",                 
                 }
             }
         },
@@ -220,6 +220,7 @@
                 button2.appendChild(edit)
 				button2.setAttribute('class', 'btn btn-info')
                 var button3 = document.createElement("button")
+                button1.addEventListener("click", addsub)
                 button2.addEventListener("click", editModal);
                 button3.addEventListener("click", del);
 				button3.setAttribute('class', 'btn btn-danger')
@@ -229,6 +230,7 @@
                 td.appendChild(button1)
                 td.appendChild(button2)
                 td.appendChild(button3)
+                td.setAttribute('class','col-sm-10')
 
                 var table = document.getElementById("mytable");
                 var row = table.insertRow(0);
@@ -285,7 +287,7 @@
                 var td = document.createElement('td')
                
                 var button3 = document.createElement("button")
-                //button3.addEventListener("click", del);
+                button3.addEventListener("click", delsub);
 				button3.setAttribute('class', 'btn btn-danger')
                 var delete1 = document.createTextNode('Delete')
 				
@@ -294,12 +296,16 @@
 
                 var table = document.getElementById("subtable");
                 var row = table.insertRow(0);
-                row.setAttribute('id', 'row')
+                row.setAttribute('id', 'subrow')
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
-                cell1.innerHTML = this.input.courseName;
+                cell1.innerHTML = this.input.subname;
                 cell2.appendChild(td)
 
+            },
+            delsub(){
+                var row = document.getElementById('subrow')
+                row.parentNode.removeChild(row);
             }
         }
     }
@@ -310,6 +316,14 @@
     function editModal(){
         var editM = document.getElementById('editModal')
         editM.style.display = "block";
+    }
+    function delsub(){
+        var row = document.getElementById('subrow')
+        row.parentNode.removeChild(row);
+    }
+    function addsub(){
+        var subM = document.getElementById('subjectModal')
+        subM.style.display = "block"
     }
     
 

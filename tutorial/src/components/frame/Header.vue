@@ -24,8 +24,14 @@
 
 
 <script>
+    import AUTH from 'services/auth/index.js'
     import Router from 'router'
     export default{
+        data(){
+            return{
+                shownav: AUTH.shownav
+            }
+        },
         methods: {
             redirect(route){
                 Router.push(route)

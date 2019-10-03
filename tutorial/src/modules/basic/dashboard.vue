@@ -1,6 +1,10 @@
 <template>
     <div id ="dashboard">
-        <Header></Header>
+        <header id = "header">
+        <b-navbar toggleable="lg" type="dark" variant="primary" id="nav" class="navbar navbar-default navbar-fixed-top">
+            <b-navbar-brand id = "title" v-on:click="isHidden = !isHidden" >☰ MyFirstApp</b-navbar-brand>
+        </b-navbar>  
+        </header>
         <Sidebar id="sidebar" v-if="!isHidden"></Sidebar>
         <div id="dash">
         <center>
@@ -16,7 +20,6 @@
 </template>
 
 <script>
-import Header from 'components/frame/Header.vue'
 import Sidebar from 'components/frame/Sidebar.vue'
 import AUTH from 'services/auth'
 
@@ -34,7 +37,6 @@ export default {
       }
   },
   components: {
-      Header,
       Sidebar
   }
 }

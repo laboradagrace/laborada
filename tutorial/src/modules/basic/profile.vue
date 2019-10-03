@@ -97,7 +97,7 @@
             <div class="panel-body">
             <div class="form-group">
                 <div class="col-sm-10 col-sm-offset-2">
-                <button type="submit" class="btn btn-primary" @click = "editSubmit()">Submit</button>
+                <button class="btn btn-primary" @click = "editSubmit()">Submit</button>
                 <br><br>
                 <button type="reset" class="btn btn-default" @click = "cancel()">Cancel</button>
                 </div>
@@ -132,13 +132,13 @@
                 isHidden: false,
                 fn: fullname,
                 email: email,
-                location: '',
+                location: 'Default',
                 input:{
                     location: 'Default',
                     fname: fn,
                     lname: ln,
                     email: email,
-                    picAddress: ''
+                    picAddress: "https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"
                 }
             }
         },

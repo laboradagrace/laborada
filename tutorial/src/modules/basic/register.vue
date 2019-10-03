@@ -29,6 +29,7 @@
     import Header from 'components/frame/Header.vue'
     import AUTH from 'services/auth' 
     import router from 'router'
+    import jquery from 'jquery'
     export default {
         name:'register',
         auth: AUTH,
@@ -38,11 +39,11 @@
         data() {
             return {
                 input: {
-                    fname: "",
-                    lname: "",
-                    email: "",
-                    password: "",
-                    cfmpassword: ""
+                    fname: null,
+                    lname: null,
+                    email: null,
+                    password: null,
+                    cfmpassword: null
                 }
             }
         },
@@ -55,6 +56,18 @@
                 else{
                     alert('your password does not match')
                 }
+            },
+            reg2(){
+                let link = `http://localhost:3000/db/create/${this.input.fname}/${this.input.email}/${this.input.password}`
+                jquery.ajax({
+                    url: link,
+                    method: 'GET',
+                    headers: {
+                        'Access-Control-Allow-Origin' : '*'
+                    }
+                }).then(response =>{
+                    alert(response.this.input.fname)
+                })
             }
         }
     }
