@@ -4,7 +4,7 @@
     <form  id="login-form">
 	<h1>Welcome!</h1>
 	<div class="input-box">
-	<input type="email" v-model="input.email" placeholder="Email" required="required">
+	<input type="email" v-model="input.username" placeholder="Username" required="required">
 	</div>
 	<div class="input-box">
 	<input type="password" v-model="input.password" placeholder="Password" required="required">
@@ -34,14 +34,14 @@
         data() {
             return {
                 input: {
-                    email: "",
+                    username: "",
                     password: ""
                 }
             }
         },
         methods: {
             login() {
-                if(this.input.email != "" && this.input.password != "") {  
+                if(this.input.username != "" && this.input.password != "") {  
                     AUTH.loginValidate(this.input.email, this.input.password)
                 }
                 else{
@@ -63,7 +63,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #00BCD4;
+    background-color: #FF3377;
 }
 #login-form {
     width: 450px;
@@ -114,7 +114,7 @@ body {
     width: 100%;
     height: 50px;
     border: none;
-    background: linear-gradient(70deg,#2196F3,#03bcd4,#2196F3);
+    background: linear-gradient(70deg,#FF3377,#03bcd4,#2196F3);
     background-size: 200%;
     color: #fff;
     outline: none;

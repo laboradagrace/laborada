@@ -1,6 +1,7 @@
 import router from "../../router";
 
     export default {
+            passwordValid: 0,
             shownav: sessionStorage.getItem('token'),
             //err: "",
             Users : [],
@@ -34,19 +35,16 @@ import router from "../../router";
 
                 
             },
-            StoreData(fname,lname,email,pass){
-                // var regAccount = {
-                //     fname: fname,
-                //     lname: lname,
-                //     email: email,
-                //     pass: pass
-                // }
-                this.currentUser.fname = fname;
-                this.currentUser.lname = lname;
-                this.currentUser.email = email;
-                this.currentUser.pass = pass;
-                
-
+            passwordValidation(password){
+                var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+                if(password.length > 8 && password.match(passw)){
+                    this.passwordValid = 1;
+                    //alert("password passed")
+                }
+                else{
+                    alert("password not valid")
+                    this.passwordValid = 0;
+                }
             }
     }
     

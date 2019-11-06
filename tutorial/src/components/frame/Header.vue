@@ -1,7 +1,7 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="dark" variant="primary">
-            <b-navbar-brand id = "title" >MyFirstApp</b-navbar-brand>
+        <b-navbar toggleable="lg" type="dark"  variant="dark">
+            <b-navbar-brand id = "title" >SoShalon</b-navbar-brand>
             
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
@@ -20,6 +20,7 @@
     #title{
         color: $primary !important;
     }
+
 </style>
 
 

@@ -135,8 +135,8 @@
                 location: 'Default',
                 input:{
                     location: 'Default',
-                    fname: fn,
-                    lname: ln,
+                    fname: fn.replace(/['"]+/g, ''),
+                    lname: ln.replace(/['"]+/g, ''),
                     email: email,
                     picAddress: "https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"
                 }
