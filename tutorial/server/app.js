@@ -40,10 +40,14 @@ app.post('/create',function(req,res){
 
 
 app.get('/Users', function(req, res){
-    res.send(User)
-    //console.log(res.json(User))
-   //user.find({username :"username" , })
-  })
+    console.log("I received a GET request")
+    User.find({},function(err, users){
+        console.log("Getting data from db");
+        console.log(users);
+        res.json(users);
+    });
+    console.log("Returned data");
+});
 
 
 
