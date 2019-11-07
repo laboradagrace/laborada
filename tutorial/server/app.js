@@ -1,7 +1,7 @@
 
 //var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-
+var session = require('express-session');
 //Create  database :
 var url = "mongodb://localhost:27017/sampledb";
 const User = require('../model/User')
@@ -16,6 +16,11 @@ app.use(jsonParser)
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 
 app.use(cors());
@@ -38,18 +43,30 @@ app.post('/create',function(req,res){
     })   
 })
 
-
-app.get('/Users', function(req, res){
-    console.log("I received a GET request")
-    User.find({},function(err, users){
-        console.log("Getting data from db");
-        console.log(users);
-        res.json(users);
-    });
-    console.log("Returned data");
+//login authentication 
+app.get('/auth', function(req, res){
+    var username = req.body.username;
+    var password = req.body.password;
+    User.findOne({username : username}).exec()
+    .then(() =>{
+        res.status(200).json({message: 'ok'})
+        console.log('user exist')
+    })
+    .catch(err => {
+        res.status(400).json({message:err.message})
+        console.log('error')
+    })
+    
+    // .then(() =>{
+    //     res.status(200).json({message:'ok'})
+    //     console.log('ok')
+    //     console.log(req.body.username)
+    // })
+    // .catch(err =>{
+    //     res.status(400).json({message:err.message})
+    //     console.log('error')
+    // })   
 });
-
-
 
 
 
