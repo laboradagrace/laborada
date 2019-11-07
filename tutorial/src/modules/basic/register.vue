@@ -4,12 +4,6 @@
     <form method="post" onsubmit="return false" id="login-form">
       <h1>Register</h1>
       <div class="input-box">
-        <input type="text" placeholder="Firstname " required="required" v-model="input.fname">
-      </div>
-      <div class="input-box">
-        <input type="text" placeholder="Lastname " required="required" v-model="input.lname">
-      </div>
-      <div class="input-box">
         <input type="email" placeholder="Email " required="required" v-model="input.email">
       </div>
       <div class="input-box">
@@ -52,8 +46,6 @@ export default {
   data() {
     return {
       input: {
-        fname: null,
-        lname: null,
         email: null,
         password: null,
         cfmpassword: null,
@@ -92,7 +84,6 @@ export default {
       //     console.log(err.message)
       // })
       var data = {
-        name: this.input.fname + " " + this.input.lname,
         email: this.input.email,
         username: this.input.username,
         password: this.input.password

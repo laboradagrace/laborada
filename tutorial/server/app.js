@@ -39,14 +39,26 @@ app.post('/create',function(req,res){
 })
 
 
-app.get('/Users', function(req, res){
-    console.log("I received a GET request")
-    User.find({},function(err, users){
-        console.log("Getting data from db");
-        console.log(users);
-        res.json(users);
-    });
-    console.log("Returned data");
+app.post('/auth', function(req, res){
+    var Username = req.body.username;
+    var Password = req.body.password
+    //res.send(Username)
+    
+    User.findOne({username: Username})
+    .then((result) => {
+        //res.send("password: " + result.password)
+        if(result.username == Username && result.password == Password){
+            res.status(200).json({message:'ok'})
+            console.log('account exist')
+        }
+    })
+    .catch(err =>{
+        res.status(400).json({message:err.message})
+        console.log('account doesnt exist')
+    })
+       
+    
+    //console.log("Returned data");
 });
 
 
