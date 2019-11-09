@@ -1,7 +1,10 @@
 
 //var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+//var session = require('express-session');
 //Create  database :
 var url = "mongodb://localhost:27017/sampledb";
 const User = require('../model/User')
@@ -16,6 +19,13 @@ app.use(jsonParser)
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+
+
+// app.use(session({
+// 	secret: 'secret',
+// 	resave: true,
+// 	saveUninitialized: true
+// }));
 
 
 app.use(cors());
@@ -38,7 +48,6 @@ app.post('/create',function(req,res){
     })   
 })
 
-
 app.post('/auth', function(req, res){
     var Username = req.body.username;
     var Password = req.body.password
@@ -51,17 +60,17 @@ app.post('/auth', function(req, res){
             res.status(200).json({message:'ok'})
             console.log('account exist')
         }
+        else{
+            console.log('account dont exist')
+        }
     })
     .catch(err =>{
         res.status(400).json({message:err.message})
-        console.log('account doesnt exist')
     })
        
     
     //console.log("Returned data");
 });
-
-
 
 
 

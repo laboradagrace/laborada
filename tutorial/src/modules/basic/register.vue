@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       input: {
-        email: null,
+        email: "",
         password: null,
         cfmpassword: null,
         username: null
@@ -54,41 +54,12 @@ export default {
     };
   },
   methods: {
-    register() {
-      if (this.input.password == this.input.cfmpassword) {
-        AUTH.StoreData(
-          this.input.fname,
-          this.input.lname,
-          this.input.email,
-          this.input.password
-        );
-        router.push({ path: "/login" });
-      } else {
-        alert("your password does not match");
-      }
-    },
     reg2() {
-      //let link = `http://localhost:3000/db/create/${this.input.fname}/${this.input.email}/${this.input.password}`
-      // let link = `http://localhost:3000/create`
-      // jquery.ajax({
-      //     url: link,
-      //     method: 'POST',
-      //     dataType: 'json',
-      //     data: {'name':this.fname, email:this.email},
-      //     headers: {
-      //         'Access-Control-Allow-Origin' : '*'
-      //     }
-      // }).then(response =>{
-      //     alert(response.this.input.fname)
-      // }).catch(err =>{
-      //     console.log(err.message)
-      // })
       var data = {
         email: this.input.email,
         username: this.input.username,
         password: this.input.password
       };
-
       AUTH.passwordValidation(this.input.password);
       if (AUTH.passwordValid == 1) {
         if (this.input.password == this.input.cfmpassword) {
@@ -97,6 +68,9 @@ export default {
               if (response.data.message == "ok") {
                 console.log("ok");
                 router.push({ path: "/login" });
+              }
+              else{
+                alert("Username already exist")
               }
             },
             err => {
@@ -108,6 +82,8 @@ export default {
         else{
           alert("Password did not match")
         }
+      }else{
+        alert("Password not valid")
       }
 
 

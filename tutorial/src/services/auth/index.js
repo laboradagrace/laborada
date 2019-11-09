@@ -42,7 +42,6 @@ import router from "../../router";
                     //alert("password passed")
                 }
                 else{
-                    alert("password not valid")
                     this.passwordValid = 0;
                 }
             }

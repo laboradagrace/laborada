@@ -4,18 +4,22 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   email:{
     type: String,
-    required: true,
+    required: true
   },
   username:{
     type: String,
-    required: true,
-    unique: true
+    required: true
+    // unique: true
   },
   password: {
     type: String,
     required: true
   }
+  
+  //versionKey: false // You should be aware of the outcome after set to false
+
  
 });
 
-module.exports = mongoose.model('User',UserSchema)
+var User = mongoose.model('User',UserSchema);
+module.exports = User;

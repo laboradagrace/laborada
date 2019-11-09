@@ -27,6 +27,7 @@ import Header from "components/frame/Header.vue";
 import AUTH from "services/auth";
 import { constants } from "fs";
 import axios from "axios";
+import router from "router";
 sessionStorage.setItem("token", false);
 export default {
   name: "login",
@@ -54,11 +55,15 @@ export default {
         response => {
           if (response.data.message == "ok") {
             console.log("ok");
-            //router.push({ path: "/login" });
+            router.push({ path: "/dashboard" });
+          }
+          else{
+            alert('Incorrect Username or Password')
           }
         },
         err => {
           console.log(err);
+          //alert('Incorrect Username or Password')
         }
       );
     }
