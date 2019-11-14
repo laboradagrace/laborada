@@ -15,11 +15,44 @@ var UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
-
-  //versionKey: false // You should be aware of the outcome after set to false
-
-
+  },
+  imgURL: {
+    type: String,
+    required: false
+  },
+  fullname: {
+    type: String,
+    required: false
+  },
+  address: {
+    type: String,
+    required: false
+  },
+  contactNo: {
+    type: String,
+    required: false
+  },
+  messengerId: {
+    type: String,
+    required: false
+  },
+  address: {
+    type: String,
+    required: false
+  },
+  serviceOffered: {
+    type: String,
+    required: false
+  },
+  description: {
+    type: String,
+    required: false
+  }//,
+  // schedule: {
+  //   type: String,
+  //   required: false,
+  //   enum:[]
+  // }
 });
 
 UserSchema.statics.authenticate = function (username, password, callback) {
@@ -38,26 +71,9 @@ UserSchema.statics.authenticate = function (username, password, callback) {
       else{
         return callback();
       }
-      // bcrypt.compare(password, user.password, function (err, result) {
-      //   if (result === true) {
-      //     return callback(null, user);
-      //   } else {
-      //     return callback();
-      //   }
-      // })
+      
     });
 }
-//hashing a password before saving it to the database
-// UserSchema.pre('save', function (next) {
-//   var user = this;
-//   bcrypt.hash(user.password, 10, function (err, hash) {
-//     if (err) {
-//       return next(err);
-//     }
-//     user.password = hash;
-//     next();
-//   })
-// });
 
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
