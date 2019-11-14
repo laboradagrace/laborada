@@ -69,12 +69,13 @@ export default {
                 console.log("ok");
                 router.push({ path: "/login" });
               }
-              else{
-                alert("Username already exist")
-              }
             },
             err => {
-              console.log(err);
+              if(err){
+                console.log(err);
+                alert("Username already exist")
+              }
+              
               
             }
           );

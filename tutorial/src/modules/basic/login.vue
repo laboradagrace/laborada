@@ -51,19 +51,16 @@ export default {
         password: this.input.password
       };
 
-      axios.post("http://localhost:3000/auth", data).then(
+      axios.get("http://localhost:3000/auth", data).then(
         response => {
-          if (response.data.message == "ok") {
+          if (response.data.message == "oks") {
             console.log("ok");
             router.push({ path: "/dashboard" });
           }
-          else{
-            alert('Incorrect Username or Password')
-          }
+          
         },
         err => {
           console.log(err);
-          //alert('Incorrect Username or Password')
         }
       );
     }
