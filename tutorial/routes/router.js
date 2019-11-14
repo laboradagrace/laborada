@@ -5,49 +5,22 @@ var User = require('../model/user');
 
 // GET route for reading data
 router.get('/', function (req, res, next) {
-  return res.sendFile(path.join(__dirname + '/src/app.vue'));
+  return res.sendFile(path.join(__dirname + 'modules/basic/login.vue'));
 });
 
 
-//POST route for updating data
-router.post('/', function (req, res, next) {
-  // confirm that user typed same password twice
-  if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Passwords do not match.');
-    err.status = 400;
-    res.send("passwords dont match");
-    return next(err);
-  }
-
-  if (req.body.email &&
-    req.body.username &&
-    req.body.password &&
-    req.body.passwordConf) {
-
-    var userData = {
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-    }
-
-    User.create(userData, function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        req.session.userId = user._id;
-        return res.redirect('/dashboard');
-      }
-    });
-
-  } else if (req.body.logemail && req.body.logpassword) {
-    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
+//login
+router.post('/auth', function (req, res, next) {
+   if (req.body.username && req.body.password) {
+    User.authenticate(req.body.username, req.body.password, function (error, user) {
       if (error || !user) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
         return next(err);
       } else {
         req.session.userId = user._id;
-        return res.redirect('/dashboard');
+        res.status(200).json({message:'oks'})
+        //return res.redirect('modules/basic/dashboard.vue');
       }
     });
   } else {
@@ -56,9 +29,22 @@ router.post('/', function (req, res, next) {
     return next(err);
   }
 })
+//register save to db
+router.post('/create',function(req,res){
+    let user = new User(req.body)
+    user.save()
+    .then(() =>{
+        res.status(200).json({message:'ok'})
+        console.log('ok')
+    })
+    .catch(err =>{
+        res.status(400).json({message:err.message})
+        console.log('error')
+    })   
+})
 
 // GET route after registering
-router.get('/profile', function (req, res, next) {
+router.get('modules/basic/dashboard.vue', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -68,9 +54,9 @@ router.get('/profile', function (req, res, next) {
           var err = new Error('Not authorized! Go back!');
           err.status = 400;
           return next(err);
-        } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-        }
+        } //else {
+        //   return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+        // }
       }
     });
 });

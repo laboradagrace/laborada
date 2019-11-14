@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <form id="login-form">
+    <form id="login-form" onsubmit="event.preventDefault();">
       <h1>Welcome!</h1>
       <div class="input-box">
         <input type="text" v-model="input.username" placeholder="Username" required="required">
@@ -51,7 +51,7 @@ export default {
         password: this.input.password
       };
 
-      axios.get("http://localhost:3000/auth", data).then(
+      axios.post("http://localhost:3000/auth", data).then(
         response => {
           if (response.data.message == "oks") {
             console.log("ok");

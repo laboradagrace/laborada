@@ -73,7 +73,7 @@ export default {
             err => {
               if(err){
                 console.log(err);
-                alert("Username already exist")
+                //alert("Username already exist")
               }
               
               
